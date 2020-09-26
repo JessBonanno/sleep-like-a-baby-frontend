@@ -36,11 +36,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const DatePicker = ({time}) => {
+const DatePicker = ({title, time}) => {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const {activeDayLog} = useContext(SleepLogsContext)
-
+  const {entryValues, setEntryValues} = useContext(SleepLogsContext)
+  console.log({title})
   useEffect(() => {
     if (time) {
       setSelectedDate(time)
@@ -48,13 +48,30 @@ const DatePicker = ({time}) => {
   }, [time])
 
   const handleDateChange = date => {
-    console.log(date);
+    // console.log(date);
+    console.log(moment(date).format('hh:mm:ss'))
+    if (title.includes('Bedtime')) {
+      setEntryValues({
+        ...entryValues,
+        bedtime: moment(date).format('hh:mm:ss'),
+      })
+    } else {
+            setEntryValues({
+        ...entryValues,
+        wake_time: moment(date).format('hh:mm:ss'),
+      })
+
+    }
     setSelectedDate(date);
   };
+
+  console.log(entryValues)
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justify='space-around'>
         <KeyboardTimePicker
+          id={`${title}`}
           margin="normal"
           value={selectedDate}
           onChange={handleDateChange}

@@ -36,7 +36,6 @@ const EntryCard = ({title, time, score}) => {
   const {entryValues, setEntryValues} = useContext(SleepLogsContext)
 
 const setScores = (id, score) => {
-    console.log(id)
     if (id.includes('Bedtime')) {
       setEntryValues({
         ...entryValues,
@@ -54,7 +53,6 @@ const setScores = (id, score) => {
       })
     }
   }
-  console.log({entryValues})
 
   return (
     <Grid container direction={'column'} className={classes.cardWrapper}>
@@ -63,7 +61,7 @@ const setScores = (id, score) => {
       </Grid>
       {title !== 'Day Mood' && (
         <Grid item className={classes.timeWrapper}>
-          <TimePicker time={new Date(`${'2020-09-19T'}${time}`)}/>
+          <TimePicker title={title} time={new Date(`${'2020-09-19T'}${time}`)}/>
         </Grid>)}
 
       <Grid item className={classes.emojiWrapper}>
