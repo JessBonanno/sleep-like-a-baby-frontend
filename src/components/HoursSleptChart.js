@@ -42,7 +42,6 @@ const HoursSleptChart = () => {
   const classes = useStyles();
   const {daysOfWeek} = useContext(SleepLogsContext)
 
-  console.log(daysOfWeek)
   return (
     <ComposedChart
       className={classes.chart}

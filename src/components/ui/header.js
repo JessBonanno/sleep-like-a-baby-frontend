@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {useTheme} from "@material-ui/styles";
@@ -38,14 +38,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles();
-  const {logout, loggedIn} = useContext(UsersContext)
+  const {logout, userInfo} = useContext(UsersContext)
   const theme = useTheme();
   const XSDown = useMediaQuery(theme.breakpoints.down('xs'))
   const SMDown = useMediaQuery(theme.breakpoints.down('sm'))
   const MDDown = useMediaQuery(theme.breakpoints.down('md'))
   const LGDown = useMediaQuery(theme.breakpoints.down('lg'))
-  const {userInfo} = useContext(UsersContext)
-
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
@@ -60,35 +58,28 @@ export default function ButtonAppBar() {
                       className={classes.title}>
             Sleep Like A Baby
           </Typography>
-          <Typography component={Link} to={loggedIn
-            ?
-            '/home'
-            :
-            '/login'}
+          <Typography component={Link} to={'/home'}
                       className={classes.link}>
-            Sleep Stats
+            Dashboard
           </Typography>
           <Typography component={Link}
-                      to={loggedIn
+                      to={userInfo && userInfo.recommended_hours !== null
                         ?
-                        userInfo && userInfo.recommended_hours !== null
-                          ?
-                          '/recommendation'
-                          : '/no-data'
-                        :
-                        '/login'}
+                        '/recommendation'
+                        : '/no-data'
+                      }
                       className={classes.link}>
             Recommendation
           </Typography>
-          {loggedIn ?
+          {(userInfo.id !== '') ?
             <Typography component={Link} to={'/login'} onClick={logout}
                         className={classes.link}>
               Logout
-            </Typography> :
-            <Typography component={Link} to={'/login'}
-                        className={classes.link}>
+            </Typography> : <Typography component={Link} to={'/login'}
+                                        className={classes.link}>
               Login
             </Typography>}
+
 
         </Toolbar>
       </AppBar>

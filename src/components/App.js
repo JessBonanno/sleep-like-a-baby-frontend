@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import {ThemeProvider} from '@material-ui/core/styles';
 import theme from './ui/Theme'
 
@@ -15,27 +15,31 @@ import Header from "./ui/header";
 import HoursSleptChart from "./HoursSleptChart";
 import {UsersContext} from "../contexts/UsersContext";
 import {LabelOff} from "@material-ui/icons";
+import PrivateRoute from "../utils/PrivateRoute";
 
 function App() {
-  const {loggedIn} = useContext(UsersContext)
   return (
 
     <ThemeProvider theme={theme}>
       <Router>
         <Header/>
-        <Routes>
-          <Route path="/" element={<MarketingPage/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/signup" element={<Signup/>}/>
-          <Route path={loggedIn ? "/home" : '/login'}
-                 element={loggedIn ? (<Homepage/>) : (<Login/>)}/>
-          <Route path={loggedIn ? "/new-entry" : '/login'}
-                 element={loggedIn ? (<Login/>) : <SleepEntryPage/>}/>
-          <Route path={loggedIn ? "/recommendation" : 'login'}
-                 element={loggedIn ? (<Recommendation/>) : (<Login/>)}/>
-          <Route path={loggedIn ?  "/no-data" : '/login'}
-                 element={loggedIn ? (<NoData/>) : (<Login/>)}/>
-        </Routes>
+          <Route path="/">
+            <MarketingPage/>
+          </Route>
+          <Route path="/login">
+            <Login/>
+          </Route>
+          <Route path="/signup">
+            <Signup/>
+          </Route>
+          <PrivateRoute path="/home"
+                        component={Homepage}/>
+          <PrivateRoute path="/new-entry"
+                        component={SleepEntryPage}/>
+          <PrivateRoute path={"/recommendation"}
+                        component={Recommendation}/>
+          <PrivateRoute path={"/no-data"}
+                        component={NoData}/>
       </Router>
     </ThemeProvider>
   );

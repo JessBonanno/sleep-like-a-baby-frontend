@@ -148,7 +148,7 @@ export default createMuiTheme({
         color: astral,
       },
       current: {
-        color: astral,
+        color: orange,
       },
     },
     MuiPickersModal: {

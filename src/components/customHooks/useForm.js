@@ -1,14 +1,14 @@
 import React, {useContext, useState} from 'react';
 import {axiosWithAuth} from "../../utils/axiosWithAuth";
-import {useNavigate} from "react-router";
+import {useHistory} from "react-router";
 import {UsersContext} from "../../contexts/UsersContext";
 
 
 export const useForm = (initialValues) => {
-  const {setLoggedIn} = useContext(UsersContext)
   const [values, setValues] = useState(initialValues);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const {getUserInfo} = useContext(UsersContext);
+  const history = useHistory();
 
   const handleChanges = (e) => {
     setValues({
@@ -25,11 +25,12 @@ export const useForm = (initialValues) => {
         console.log(res)
        await localStorage.setItem('token', res.data.token)
       const token = await localStorage.getItem('token');
+      await getUserInfo();
       if (token) {
-        setLoggedIn(true)
-      }
         setLoading(false)
-        navigate('/home')
+        console.log({token})
+        history.push('/home')
+      }
     } catch (err ) {
       console.log(err)
         setLoading(false)

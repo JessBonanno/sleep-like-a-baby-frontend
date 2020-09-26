@@ -1,18 +1,17 @@
 import React, {createContext, useState, Context} from 'react';
 import {axiosWithAuth} from '../utils/axiosWithAuth'
+import {useHistory} from "react-router";
 
 export const UsersContext = createContext({});
 
 const UsersProvider = ({children}) => {
-  const [loggedIn, setLoggedIn] = useState(false)
+  const history = useHistory();
   const [userInfo, setUserInfo] = useState({
     id: '',
     email: '',
     username: '',
     recommended_hours: 0,
   });
-
-
 
 
   const getUserInfo = () => {
@@ -31,20 +30,23 @@ const UsersProvider = ({children}) => {
       .then(res => {
         console.log(res)
         localStorage.removeItem('token')
-        const token = localStorage.getItem('token')
-        if (!token) {
-          setLoggedIn(false)
+        setUserInfo({
+          id: '',
+          email: '',
+          username: '',
+          recommended_hours: 0,
+        })
+        if (!localStorage.getItem('token')) {
+          history.push('/login')
         }
       })
-    .catch(err => {
+      .catch(err => {
         console.log(err)
       })
   }
 
   return (
     <UsersContext.Provider value={{
-      loggedIn,
-      setLoggedIn,
       userInfo,
       setUserInfo,
       getUserInfo,
