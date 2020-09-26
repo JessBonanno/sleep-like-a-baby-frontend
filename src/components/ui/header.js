@@ -58,7 +58,7 @@ export default function ButtonAppBar() {
                       className={classes.title}>
             Sleep Like A Baby
           </Typography>
-          <Typography component={Link} to={'/home'}
+          <Typography component={Link} to={'/dashboard'}
                       className={classes.link}>
             Dashboard
           </Typography>

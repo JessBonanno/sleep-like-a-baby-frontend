@@ -120,6 +120,7 @@ const Login = () => {
               <Button variant={'outlined'}
                       color={'primary'}
                       className={classes.button}
+                      type={'submit'}
                       onClick={handleLogin}>
                 {
                   loading ? <CircularProgress/> :'Login'

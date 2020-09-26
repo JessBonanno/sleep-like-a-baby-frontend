@@ -92,6 +92,7 @@ export default createMuiTheme({
     h6: {
       color: 'white',
       fontSize: '1rem',
+      fontFamily: comfortaa,
     },
     p: {
       color: 'white',

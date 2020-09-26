@@ -29,7 +29,7 @@ export const useForm = (initialValues) => {
       if (token) {
         setLoading(false)
         console.log({token})
-        history.push('/home')
+        history.push('/dashboard')
       }
     } catch (err ) {
       console.log(err)

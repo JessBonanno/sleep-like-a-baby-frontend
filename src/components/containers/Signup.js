@@ -124,13 +124,14 @@ const Signup = () => {
 
           <Grid item className={classes.buttonItem}>
             <Button variant={'outlined'}
-                      color={'primary'}
-                      className={classes.button}
-                      onClick={handleSignup}>
-                {
-                  loading ? <CircularProgress/> :'Sign Up'
-                }
-              </Button>
+                    color={'primary'}
+                    className={classes.button}
+                    type={'submit'}
+                    onClick={handleSignup}>
+              {
+                loading ? <CircularProgress/> : 'Sign Up'
+              }
+            </Button>
           </Grid>
         </Grid>
       </Grid>

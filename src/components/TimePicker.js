@@ -36,33 +36,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const DatePicker = () => {
+const DatePicker = ({time}) => {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const {getDaysOfTheWeek} = useContext(SleepLogsContext)
+  const {activeDayLog} = useContext(SleepLogsContext)
+
+  useEffect(() => {
+    if (time) {
+    console.log(time)
+      setSelectedDate(time)
+      }
+  }, [time])
 
   const handleDateChange = date => {
     console.log(date);
     setSelectedDate(date);
   };
-
-  useEffect(() => {
-    getDaysOfTheWeek(moment(selectedDate).format('MM-DD-YYYY'));
-  },[selectedDate])
-
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justify='space-around'>
-        <KeyboardDatePicker
-          className={classes.picker}
+        <KeyboardTimePicker
           margin="normal"
-          id="date-picker-dialog"
-          format="MM/dd/yyyy"
           value={selectedDate}
           onChange={handleDateChange}
-
           KeyboardButtonProps={{
-            'aria-label': 'change date',
+            'aria-label': 'change time',
           }}
           InputLabelProps={{
             classes: {

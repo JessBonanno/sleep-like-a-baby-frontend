@@ -48,13 +48,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Homepage = () => {
+const Dashboard = () => {
   const classes = useStyles();
-  const {getDaysOfTheWeek, daysOfWeek} = useContext(SleepLogsContext)
+  const {getDaysOfTheWeek, daysOfWeek, startNewLog} = useContext(SleepLogsContext)
 
-  useEffect(()=> {
-  getDaysOfTheWeek(moment().format('MM-DD-YYYY'))
-},[])
+  useEffect(() => {
+    getDaysOfTheWeek(moment().format('MM-DD-YYYY'))
+  }, [])
 
   return (
     <Grid container direction={'column'}>
@@ -65,7 +65,7 @@ const Homepage = () => {
             <Typography variant={'h5'}>Select a week to view</Typography>
           </Grid>
           <Grid item className={classes.datePicker}>
-            <DatePicker />
+            <DatePicker/>
           </Grid>
         </Grid>
       </Grid>
@@ -76,14 +76,24 @@ const Homepage = () => {
             <Grid container direction={'column'}
                   className={classes.chartContainer} alignItems={'center'}>
               <Grid item className={classes.chartHeader}>
-                <Typography variant={'h6'} className={classes.headerText}>Insights for the Week
+                <Typography variant={'h6'} className={classes.headerText}>Insights
+                  for the Week
                   of: {daysOfWeek[0] && daysOfWeek[0].date}</Typography>
               </Grid>
               <Grid item>
                 <HoursSleptChart/>
               </Grid>
               <Grid item className={classes.buttonWrapper}>
-              <Button variant={'outlined'} color={'primary'} startIcon={<AddIcon/>} className={classes.button}>Add Entry</Button>
+                <Button
+                  variant={'outlined'}
+                  color={'primary'}
+                  startIcon={<AddIcon/>}
+                  onClick={startNewLog}
+                  className={classes.button}
+                  component={Link}
+                  to={'/create-entry'}
+                >Add
+                  Entry</Button>
               </Grid>
             </Grid>
           </Grid>
@@ -95,4 +105,4 @@ const Homepage = () => {
     </Grid>
   );
 }
-export default Homepage;
+export default Dashboard;

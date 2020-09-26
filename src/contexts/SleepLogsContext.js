@@ -5,9 +5,7 @@ import moment from "moment";
 export const SleepLogsContext = createContext({});
 
 const SleepLogsProvider = ({children}) => {
-  const [currentDayLog, setCurrentDayLog] = useState({});
-  const [currentWeekLog, setCurrentWeekLog] = useState({});
-  const [currentMonthLog, setCurrentMonthLog] = useState({});
+  const [activeDayLog, setActiveDayLog] = useState({});
   const [daysOfWeek, setDaysOfWeek] = useState([])
   const [chartData, setChartData] = useState([
     {
@@ -48,6 +46,7 @@ const SleepLogsProvider = ({children}) => {
   ]);
 
 
+
   const getDaysOfTheWeek = async (date) => {
     try {
           const res = await axiosWithAuth().get(`/week/days/?date=${date}`)
@@ -64,19 +63,25 @@ const SleepLogsProvider = ({children}) => {
       console.log(err)
     }
   }
+  const startNewLog = async () => {
+    try {
+      const res = await axiosWithAuth().post('/day/current-user')
+      console.log(res)
+      setActiveDayLog(res.data)
+    } catch {
+
+    }
+  }
 
   return (
     <SleepLogsContext.Provider value={{
       chartData,
-      currentDayLog,
-      setCurrentDayLog,
-      currentWeekLog,
-      setCurrentWeekLog,
-      currentMonthLog,
-      setCurrentMonthLog,
+      activeDayLog,
+      setActiveDayLog,
       daysOfWeek,
       setDaysOfWeek,
       getDaysOfTheWeek,
+      startNewLog,
     }}>
       {children}
     </SleepLogsContext.Provider>

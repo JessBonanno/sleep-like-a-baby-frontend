@@ -7,8 +7,8 @@ import theme from './ui/Theme'
 import MarketingPage from "./containers/MarketingPage";
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
-import Homepage from "./containers/Homepage";
-import SleepEntryPage from "./containers/SleepEntryPage";
+import Dashboard from "./containers/Dashboard";
+import Entry from "./containers/Entry";
 import Recommendation from "./containers/Recommendation";
 import NoData from "./containers/NoData";
 import Header from "./ui/header";
@@ -32,10 +32,10 @@ function App() {
           <Route path="/signup">
             <Signup/>
           </Route>
-          <PrivateRoute path="/home"
-                        component={Homepage}/>
-          <PrivateRoute path="/new-entry"
-                        component={SleepEntryPage}/>
+          <PrivateRoute path="/dashboard"
+                        component={Dashboard}/>
+          <PrivateRoute path="/create-entry"
+                        component={Entry}/>
           <PrivateRoute path={"/recommendation"}
                         component={Recommendation}/>
           <PrivateRoute path={"/no-data"}
