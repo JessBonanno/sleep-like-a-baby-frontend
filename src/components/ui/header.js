@@ -13,6 +13,7 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import {Link} from "react-router-dom";
 import {UsersContext} from "../../contexts/UsersContext";
+import {SleepLogsContext} from "../../contexts/SleepLogsContext";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +43,9 @@ export default function ButtonAppBar() {
   const SMDown = useMediaQuery(theme.breakpoints.down('sm'))
   const MDDown = useMediaQuery(theme.breakpoints.down('md'))
   const LGDown = useMediaQuery(theme.breakpoints.down('lg'))
+  const {userInfo} = useContext(UsersContext)
 
+  console.log(userInfo)
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
@@ -58,7 +61,7 @@ export default function ButtonAppBar() {
           </Typography>
           <Typography component={Link} to={'/home'}
                       className={classes.link}>Sleep Stats</Typography>
-          <Typography component={Link} to={'/recommendation'}
+          <Typography component={Link} to={userInfo && (userInfo.recommended_hours !== null) ? '/recommendation' : '/no-data'}
                       className={classes.link}>Recommendation</Typography>
           {localStorage.getItem('token') ? <Typography component={Link} to={'/login'} onClick={logout}
                       className={classes.link}>Logout</Typography> : <Typography component={Link} to={'/login'}
