@@ -65,6 +65,9 @@ const setScores = (id, score) => {
         </Grid>)}
 
       <Grid item className={classes.emojiWrapper}>
+        <Grid item align={'center'}>
+          <Typography variant={'subtitle1'}>Choose your mood:</Typography>
+        </Grid>
         <Grid container className={classes.emojiContainer}
               justify={'space-evenly'}>
           <Grid item className={classes.emojiItem}>
