@@ -40,26 +40,26 @@ const useStyles = makeStyles((theme) => ({
 
 const HoursSleptChart = () => {
   const classes = useStyles();
-  const {daysOfThisWeek} = useContext(SleepLogsContext)
+  const {daysOfWeek} = useContext(SleepLogsContext)
 
-
+  console.log(daysOfWeek)
   return (
     <ComposedChart
       className={classes.chart}
         width={500}
         height={400}
-        data={chartData}
+        data={daysOfWeek && daysOfWeek}
         margin={{
           top: 20, right: 20, bottom: 20, left: 20,
         }}
       >
         <CartesianGrid stroke="#f5f5f5" />
-        <XAxis dataKey="day" />
+        <XAxis dataKey={daysOfWeek && "day"} />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="hours" barSize={20} fill="#39869D" />
-        <Line type="monotone" dataKey="quality" stroke="#ff7300" />
+        <Bar dataKey={daysOfWeek && "total_hours_slept"} barSize={20} fill="#39869D" />
+        <Line type="monotone" dataKey={daysOfWeek && "average_quality"} stroke="#ff7300" />
       </ComposedChart>
   );
 }

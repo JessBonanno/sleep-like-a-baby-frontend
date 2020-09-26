@@ -48,9 +48,9 @@ const SleepLogsProvider = ({children}) => {
   ]);
 
 
-  const getDaysOfThisWeek = async () => {
+  const getDaysOfTheWeek = async (date) => {
     try {
-          const res = await axiosWithAuth().get(`/week/days/?date=${moment().format('MM-DD-YYYY')}`)
+          const res = await axiosWithAuth().get(`/week/days/?date=${date}`)
     console.log(res)
     setDaysOfWeek(res.data.map(day => {
       return {
@@ -65,7 +65,6 @@ const SleepLogsProvider = ({children}) => {
     }
   }
 
-  console.log(daysOfWeek[0])
   return (
     <SleepLogsContext.Provider value={{
       chartData,
@@ -77,7 +76,7 @@ const SleepLogsProvider = ({children}) => {
       setCurrentMonthLog,
       daysOfWeek,
       setDaysOfWeek,
-      getDaysOfThisWeek,
+      getDaysOfTheWeek,
     }}>
       {children}
     </SleepLogsContext.Provider>

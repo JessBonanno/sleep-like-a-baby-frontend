@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core/styles";
@@ -8,6 +8,8 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import {SleepLogsContext} from "../contexts/SleepLogsContext";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   cssLabel: {
@@ -37,13 +39,18 @@ const useStyles = makeStyles((theme) => ({
 const DatePicker = () => {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const {getDaysOfTheWeek} = useContext(SleepLogsContext)
 
   const handleDateChange = date => {
     console.log(date);
-
     setSelectedDate(date);
   };
-  // console.log(selectedDate)
+
+  useEffect(() => {
+    getDaysOfTheWeek(moment(selectedDate).format('MM-DD-YYYY'));
+  },[selectedDate])
+
+  console.log(selectedDate)
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justify='space-around'>

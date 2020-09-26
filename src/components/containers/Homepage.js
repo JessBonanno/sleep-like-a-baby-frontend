@@ -50,10 +50,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Homepage = () => {
   const classes = useStyles();
-  const {getDaysOfThisWeek, daysOfWeek} = useContext(SleepLogsContext)
+  const {getDaysOfTheWeek, daysOfWeek} = useContext(SleepLogsContext)
 
   useEffect(()=> {
-  getDaysOfThisWeek()
+  getDaysOfTheWeek(moment().format('MM-DD-YYYY'))
 },[])
 
   return (
