@@ -35,16 +35,18 @@ const useStyles = makeStyles((theme) => ({
 
 const Entry = () => {
   const classes = useStyles();
-  const {activeDayLog, startNewLog} = useContext(SleepLogsContext)
+  const {activeDayLog, startNewLog, entryValues, setEntryValues} = useContext(SleepLogsContext)
   const [logInfo, setLogInfo] = useState();
 
   useEffect(() => {
     startNewLog()
-    if(activeDayLog) {
-      setLogInfo(activeDayLog)
-    }
-  }, [])
 
+  }, [])
+  useEffect(() => {
+    if(activeDayLog) {
+      setEntryValues(activeDayLog)
+    }
+  }, [activeDayLog])
   return (
     <Grid container direction={'column'} className={classes.entryContainer}
           alignItems={'center'}>
@@ -57,7 +59,7 @@ const Entry = () => {
         >
           <Grid item className={classes.titleWrapper}>
             <Typography variant={'h6'}>Entry
-              for {moment(activeDayLog && activeDayLog.date).add(1, 'day').format('MM-DD-YY')}</Typography>
+              for {moment(entryValues && entryValues.date).add(1, 'day').format('MM-DD-YY')}</Typography>
           </Grid>
           <Grid item className={classes.deleteWrapper}>
             <IconButton>
@@ -67,14 +69,13 @@ const Entry = () => {
         </Grid>
       </Grid>
       <Grid item className={classes.bedtimeWrapper}>
-        <EntryCard title={'Bedtime'} score={activeDayLog.bedtime_score} time={activeDayLog.bedtime}/>
+        <EntryCard title={'Bedtime'} score={entryValues.bedtime_score} time={entryValues.bedtime}/>
       </Grid>
       <Grid item className={classes.wakeTimeWrapper}> <EntryCard
-        title={'Wake Time'} score={activeDayLog.wake_score} time={activeDayLog.wake_time}/>
+        title={'Wake Time'} score={entryValues.wake_score} time={entryValues.wake_time}/>
       </Grid>
       <Grid item className={classes.dayMoodWrapper}>
-        <EntryCard title={'Day Mood'}score={activeDayLog.day_score}/>
-
+        <EntryCard title={'Day Mood'}score={entryValues.day_score}/>
       </Grid>
       <Grid item className={classes.buttonWrapper}>
         <Button variant={'outlined'} color={'primary'}>Submit</Button>

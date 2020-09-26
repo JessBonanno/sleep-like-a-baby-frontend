@@ -43,7 +43,6 @@ const DatePicker = ({time}) => {
 
   useEffect(() => {
     if (time) {
-    console.log(time)
       setSelectedDate(time)
       }
   }, [time])

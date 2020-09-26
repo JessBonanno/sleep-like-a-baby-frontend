@@ -7,43 +7,13 @@ export const SleepLogsContext = createContext({});
 const SleepLogsProvider = ({children}) => {
   const [activeDayLog, setActiveDayLog] = useState({});
   const [daysOfWeek, setDaysOfWeek] = useState([])
-  const [chartData, setChartData] = useState([
-    {
-      day: 'Sun',
-      hours: 6,
-      quality: 2
-    },
-    {
-      day: 'Mon',
-      hours: 7.5,
-      quality: 4
-    },
-    {
-      day: 'Tues',
-      hours: 7,
-      quality: 3
-    },
-    {
-      day: 'Weds',
-      hours: 8.5,
-      quality: 3
-    },
-    {
-      day: 'Thurs',
-      hours: 6,
-      quality: 2
-    },
-    {
-      day: 'Fri',
-      hours: 7.5,
-      quality: 4
-    },
-    {
-      day: 'Sat',
-      hours: 8,
-      quality: 3
-    },
-  ]);
+  const [entryValues, setEntryValues] = useState({
+    bedtime: '',
+    wake_time: '',
+    bedtime_score: '',
+    wake_score: '',
+    day_score: '',
+  })
 
 
 
@@ -75,11 +45,12 @@ const SleepLogsProvider = ({children}) => {
 
   return (
     <SleepLogsContext.Provider value={{
-      chartData,
       activeDayLog,
       setActiveDayLog,
       daysOfWeek,
       setDaysOfWeek,
+      entryValues,
+      setEntryValues,
       getDaysOfTheWeek,
       startNewLog,
     }}>
