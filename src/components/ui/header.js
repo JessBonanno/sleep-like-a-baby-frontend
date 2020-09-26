@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    textDecoration: "none",
   },
   link: {
     ...theme.typography.navLink,
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles();
-  const {logout} = useContext(UsersContext)
+  const {logout, loggedIn} = useContext(UsersContext)
   const theme = useTheme();
   const XSDown = useMediaQuery(theme.breakpoints.down('xs'))
   const SMDown = useMediaQuery(theme.breakpoints.down('sm'))
@@ -45,7 +46,6 @@ export default function ButtonAppBar() {
   const LGDown = useMediaQuery(theme.breakpoints.down('lg'))
   const {userInfo} = useContext(UsersContext)
 
-  console.log(userInfo)
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
@@ -56,16 +56,39 @@ export default function ButtonAppBar() {
               <MenuIcon/>
             </IconButton>
           )}
-          <Typography variant="h5" className={classes.title}>
+          <Typography component={Link} to={'/'} variant="h5"
+                      className={classes.title}>
             Sleep Like A Baby
           </Typography>
-          <Typography component={Link} to={'/home'}
-                      className={classes.link}>Sleep Stats</Typography>
-          <Typography component={Link} to={userInfo && (userInfo.recommended_hours !== null) ? '/recommendation' : '/no-data'}
-                      className={classes.link}>Recommendation</Typography>
-          {localStorage.getItem('token') ? <Typography component={Link} to={'/login'} onClick={logout}
-                      className={classes.link}>Logout</Typography> : <Typography component={Link} to={'/login'}
-                      className={classes.link}>Login</Typography> }
+          <Typography component={Link} to={loggedIn
+            ?
+            '/home'
+            :
+            '/login'}
+                      className={classes.link}>
+            Sleep Stats
+          </Typography>
+          <Typography component={Link}
+                      to={loggedIn
+                        ?
+                        userInfo && userInfo.recommended_hours !== null
+                          ?
+                          '/recommendation'
+                          : '/no-data'
+                        :
+                        '/login'}
+                      className={classes.link}>
+            Recommendation
+          </Typography>
+          {loggedIn ?
+            <Typography component={Link} to={'/login'} onClick={logout}
+                        className={classes.link}>
+              Logout
+            </Typography> :
+            <Typography component={Link} to={'/login'}
+                        className={classes.link}>
+              Login
+            </Typography>}
 
         </Toolbar>
       </AppBar>

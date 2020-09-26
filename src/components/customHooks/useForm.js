@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {axiosWithAuth} from "../../utils/axiosWithAuth";
 import {useNavigate} from "react-router";
+import {UsersContext} from "../../contexts/UsersContext";
 
 
 export const useForm = (initialValues) => {
+  const {setLoggedIn} = useContext(UsersContext)
   const [values, setValues] = useState(initialValues);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -22,6 +24,10 @@ export const useForm = (initialValues) => {
       const res = await axiosWithAuth().post('/auth/login', values)
         console.log(res)
        await localStorage.setItem('token', res.data.token)
+      const token = await localStorage.getItem('token');
+      if (token) {
+        setLoggedIn(true)
+      }
         setLoading(false)
         navigate('/home')
     } catch (err ) {

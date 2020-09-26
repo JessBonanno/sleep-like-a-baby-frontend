@@ -4,12 +4,16 @@ import {axiosWithAuth} from '../utils/axiosWithAuth'
 export const UsersContext = createContext({});
 
 const UsersProvider = ({children}) => {
+  const [loggedIn, setLoggedIn] = useState(false)
   const [userInfo, setUserInfo] = useState({
     id: '',
     email: '',
     username: '',
     recommended_hours: 0,
   });
+
+
+
 
   const getUserInfo = () => {
     axiosWithAuth().get('/users/current-user')
@@ -27,6 +31,10 @@ const UsersProvider = ({children}) => {
       .then(res => {
         console.log(res)
         localStorage.removeItem('token')
+        const token = localStorage.getItem('token')
+        if (!token) {
+          setLoggedIn(false)
+        }
       })
     .catch(err => {
         console.log(err)
@@ -35,6 +43,8 @@ const UsersProvider = ({children}) => {
 
   return (
     <UsersContext.Provider value={{
+      loggedIn,
+      setLoggedIn,
       userInfo,
       setUserInfo,
       getUserInfo,
