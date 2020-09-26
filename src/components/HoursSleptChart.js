@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core/styles";
@@ -14,8 +14,9 @@ import {
   AreaChart,
   ComposedChart, Bar,
 } from 'recharts';
+import {SleepLogsContext} from "../contexts/SleepLogsContext";
 
-const data = [
+const chartData = [
   {
     day: 'Sun', hours: 6, quality: 2
   },
@@ -27,6 +28,8 @@ const data = [
   {day: 'Sat', hours: 8, quality: 3},
 ];
 
+
+
 const useStyles = makeStyles((theme) => ({
   chart: {
     color: 'white',
@@ -35,15 +38,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const HoursSlept = () => {
+const HoursSleptChart = () => {
   const classes = useStyles();
+  const {daysOfThisWeek} = useContext(SleepLogsContext)
+
 
   return (
     <ComposedChart
       className={classes.chart}
         width={500}
         height={400}
-        data={data}
+        data={chartData}
         margin={{
           top: 20, right: 20, bottom: 20, left: 20,
         }}
@@ -58,4 +63,4 @@ const HoursSlept = () => {
       </ComposedChart>
   );
 }
-export default HoursSlept;
+export default HoursSleptChart;

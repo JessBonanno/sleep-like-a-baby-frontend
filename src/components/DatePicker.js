@@ -19,45 +19,11 @@ const useStyles = makeStyles((theme) => ({
 
   cssOutlinedInput: {
     color: theme.palette.primary.main,
-    '&$cssFocused $notchedOutline': {
-      borderColor: `${theme.palette.primary.main} !important`,
-      color: theme.palette.primary.main,
-    },
-    root: {
-      color: theme.palette.primary.main,
-    }
   },
 
   cssFocused: {
     color: theme.palette.primary.main,
-    '&$cssFocused $notchedOutline': {
-      borderColor: `${theme.palette.primary.main} !important`,
-      color: theme.palette.primary.main,
-    },
     root: {
-      color: theme.palette.primary.main,
-    }
-  },
-
-  notchedOutline: {
-    borderWidth: '1px',
-    borderColor: theme.palette.primary.main,
-    color: theme.palette.primary.main,
-    '&$cssFocused $notchedOutline': {
-      borderColor: `${theme.palette.primary.main} !important`,
-      color: theme.palette.primary.main,
-    }
-  },
-  adornment: {
-    fill: theme.palette.primary.main,
-    color: theme.palette.primary.main,
-    '&$cssFocused $notchedOutline': {
-      color: theme.palette.primary.main,
-    }
-  },
-  adornmentFocused: {
-    color: theme.palette.primary.main,
-    '&$cssFocused $notchedOutline': {
       color: theme.palette.primary.main,
     }
   },
@@ -77,7 +43,7 @@ const DatePicker = () => {
 
     setSelectedDate(date);
   };
-
+  // console.log(selectedDate)
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justify='space-around'>

@@ -4,7 +4,7 @@ export const axiosWithAuth = () => {
     const token = window.localStorage.getItem('token');
 
     return axios.create({
-        baseURL: 'https://sleep-tracker-backend.herokuapp.com/',
+        baseURL: 'https://sleep-like-a-baby-api.herokuapp.com/',
 
         headers: {
             Authorization: token

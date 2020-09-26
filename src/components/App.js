@@ -12,7 +12,7 @@ import SleepEntryPage from "./containers/SleepEntryPage";
 import Recommendation from "./containers/Recommendation";
 import NoData from "./containers/NoData";
 import Header from "./ui/header";
-import HoursSlept from "./HoursSlept";
+import HoursSleptChart from "./HoursSleptChart";
 
 function App() {
   return (

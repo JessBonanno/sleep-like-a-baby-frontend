@@ -25,7 +25,7 @@ const mineshaft15p = '#363636'
 const mineshaft16p = '#383838'
 const gray = '#727272'
 const orange = '#ff7300'
-const smile = '#CEC469'
+const smile = '#FF7300'
 
 
 export default createMuiTheme({
@@ -160,9 +160,7 @@ export default createMuiTheme({
     },
     MuiSvgIcon: {
       root: {
-        width: 18,
-        height: 18,
-        fill: astral,
+        fill: smile,
       },
     },
   },

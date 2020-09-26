@@ -43,7 +43,6 @@ export default function ButtonAppBar() {
   const MDDown = useMediaQuery(theme.breakpoints.down('md'))
   const LGDown = useMediaQuery(theme.breakpoints.down('lg'))
 
-  console.log(localStorage.getItem('token'))
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>

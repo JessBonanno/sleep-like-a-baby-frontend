@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core/styles";
@@ -8,10 +8,12 @@ import AddIcon from '@material-ui/icons/Add';
 
 
 // local components
-import HoursSlept from "../HoursSlept";
+import HoursSleptChart from "../HoursSleptChart";
 import DayAtAGlanceCard from "../DayAtAGlanceCard";
 import DayAtAGlance from "./DayAtAGlance";
 import DatePicker from "../DatePicker";
+import {SleepLogsContext} from "../../contexts/SleepLogsContext";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   homepageContainer: {
@@ -48,6 +50,11 @@ const useStyles = makeStyles((theme) => ({
 
 const Homepage = () => {
   const classes = useStyles();
+  const {getDaysOfThisWeek, daysOfWeek} = useContext(SleepLogsContext)
+
+  useEffect(()=> {
+  getDaysOfThisWeek()
+},[])
 
   return (
     <Grid container direction={'column'}>
@@ -58,7 +65,7 @@ const Homepage = () => {
             <Typography variant={'h5'}>Select a week to view</Typography>
           </Grid>
           <Grid item className={classes.datePicker}>
-            <DatePicker/>
+            <DatePicker />
           </Grid>
         </Grid>
       </Grid>
@@ -70,10 +77,10 @@ const Homepage = () => {
                   className={classes.chartContainer} alignItems={'center'}>
               <Grid item className={classes.chartHeader}>
                 <Typography variant={'h6'} className={classes.headerText}>Insights for the Week
-                  of: 09.01.2020 - 09.07.2020</Typography>
+                  of: {daysOfWeek[0] && daysOfWeek[0].date}</Typography>
               </Grid>
               <Grid item>
-                <HoursSlept/>
+                <HoursSleptChart/>
               </Grid>
               <Grid item className={classes.buttonWrapper}>
               <Button variant={'outlined'} color={'primary'} startIcon={<AddIcon/>} className={classes.button}>Add Entry</Button>
@@ -81,7 +88,7 @@ const Homepage = () => {
             </Grid>
           </Grid>
           <Grid item className={classes.daysAtAGlanceWrapper}>
-            <DayAtAGlance/>
+            <DayAtAGlance day={daysOfWeek[0]}/>
           </Grid>
         </Grid>
       </Grid>
