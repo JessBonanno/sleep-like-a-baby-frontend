@@ -61,7 +61,7 @@ const setScores = (id, score) => {
       </Grid>
       {title !== 'Day Mood' && (
         <Grid item className={classes.timeWrapper}>
-          <TimePicker title={title} time={new Date(`${'2020-09-19T'}${time}`)}/>
+          <TimePicker title={title} time={time !== null ? (new Date(`${'2020-09-19T'}${time}`)) : (new Date())}/>
         </Grid>)}
 
       <Grid item className={classes.emojiWrapper}>

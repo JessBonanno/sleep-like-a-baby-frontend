@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Entry = () => {
   const classes = useStyles();
-  const {activeDayLog, startNewLog, entryValues, setEntryValues} = useContext(SleepLogsContext)
+  const {activeDayLog, startNewLog, entryValues, setEntryValues, submitEntryForm} = useContext(SleepLogsContext)
   const [logInfo, setLogInfo] = useState();
 
   useEffect(() => {
@@ -47,6 +47,9 @@ const Entry = () => {
       setEntryValues(activeDayLog)
     }
   }, [activeDayLog])
+
+
+
   return (
     <Grid container direction={'column'} className={classes.entryContainer}
           alignItems={'center'}>
@@ -78,7 +81,7 @@ const Entry = () => {
         <EntryCard title={'Day Mood'}score={entryValues.day_score}/>
       </Grid>
       <Grid item className={classes.buttonWrapper}>
-        <Button variant={'outlined'} color={'primary'}>Submit</Button>
+        <Button variant={'outlined'} color={'primary'} onClick={() => submitEntryForm(entryValues)}>Submit</Button>
       </Grid>
     </Grid>
   );

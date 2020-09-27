@@ -16,20 +16,19 @@ const SleepLogsProvider = ({children}) => {
   })
 
 
-
   const getDaysOfTheWeek = async (date) => {
     try {
-          const res = await axiosWithAuth().get(`/week/days/?date=${date}`)
-    console.log(res)
-    setDaysOfWeek(res.data.map(day => {
-      return {
-        // setting the date to day of the week for chart
-        ...day,
-        day: moment(day.date).add(1, 'day').format('dddd'),
-        date: moment(day.date).add(1, 'day').format('MM-DD-YY')
-      }
-    }))
-    } catch(err) {
+      const res = await axiosWithAuth().get(`/week/days/?date=${date}`)
+      console.log(res)
+      setDaysOfWeek(res.data.map(day => {
+        return {
+          // setting the date to day of the week for chart
+          ...day,
+          day: moment(day.date).add(1, 'day').format('dddd'),
+          date: moment(day.date).add(1, 'day').format('MM-DD-YY')
+        }
+      }))
+    } catch (err) {
       console.log(err)
     }
   }
@@ -38,8 +37,16 @@ const SleepLogsProvider = ({children}) => {
       const res = await axiosWithAuth().post('/day/current-user', entryValues)
       console.log(res)
       setActiveDayLog(res.data)
-    } catch {
-
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  const submitEntryForm = async () => {
+    try {
+      const res = await axiosWithAuth().put(`/day/${activeDayLog.id}`, entryValues)
+      console.log(res)
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -53,6 +60,7 @@ const SleepLogsProvider = ({children}) => {
       setEntryValues,
       getDaysOfTheWeek,
       startNewLog,
+      submitEntryForm,
     }}>
       {children}
     </SleepLogsContext.Provider>

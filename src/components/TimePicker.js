@@ -41,26 +41,28 @@ const DatePicker = ({title, time}) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const {entryValues, setEntryValues} = useContext(SleepLogsContext)
   useEffect(() => {
-    if (time === 'Invalid Date') {
-      console.log({time})
+    if (time) {
+      console.log(time)
       setSelectedDate(time)
-      } else {
-      console.log(new Date())
+    } else {
+      console.log('ELSE')
       setSelectedDate(new Date())
     }
-  }, [time])
+  }, [])
 
   const handleDateChange = date => {
-    // console.log(date);
+    console.log(date);
+    // setSelectedDate(date)
     if (title.includes('Bedtime')) {
+      console.log(moment(date).format('HH:mm:ss'))
       setEntryValues({
         ...entryValues,
-        bedtime: moment(date).format('hh:mm:ss'),
+        bedtime: moment(date).format('HH:mm:ss'),
       })
     } else {
             setEntryValues({
         ...entryValues,
-        wake_time: moment(date).format('hh:mm:ss'),
+        wake_time: moment(date).format('HH:mm:ss'),
       })
 
     }
