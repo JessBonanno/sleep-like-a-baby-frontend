@@ -68,7 +68,8 @@ const Recommendation = () => {
           </Typography></Grid>
           <Grid item><Typography variant={'subtitle2'}
                                  className={classes.subText}> You're at your
-            best when you get {userInfo.recommended_hours} hours of sleep!</Typography></Grid>
+            best when you get {userInfo.recommended_hours} hours of
+            sleep!</Typography></Grid>
           <Grid item>
             <Grid container direction={'row'}
                   className={classes.buttonContainer} spacing={3}>
@@ -81,7 +82,8 @@ const Recommendation = () => {
                   tracking</Button> </Grid>
               <Grid item className={classes.buttonItem}>
                 <Button
-                  className={classes.button} variant={'outlined'}
+                  className={classes.button} onClick={() => history.push('/')}
+                  variant={'outlined'}
                   color={'primary'}>Learn
                   More</Button> </Grid>
             </Grid>

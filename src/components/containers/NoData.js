@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   button: {
     width: 200,
   },
-    noDataImageContainer: {
+  noDataImageContainer: {
     paddingTop: theme.spacing(5),
   },
 }));
@@ -74,7 +74,10 @@ const NoData = () => {
                   tracking</Button> </Grid>
               <Grid item className={classes.buttonItem}>
                 <Button
-                  className={classes.button} variant={'outlined'}
+                  className={classes.button}
+                  onClick={() => history.push('/')}
+
+                  variant={'outlined'}
                   color={'primary'}>Learn
                   More</Button> </Grid>
             </Grid>
