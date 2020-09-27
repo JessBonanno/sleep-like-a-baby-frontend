@@ -63,7 +63,7 @@ export default function ButtonAppBar() {
             Dashboard
           </Typography>
           <Typography component={Link}
-                      to={userInfo && userInfo.recommended_hours !== null
+                      to={userInfo && (userInfo.recommended_hours > 0)
                         ?
                         '/recommendation'
                         : '/no-data'

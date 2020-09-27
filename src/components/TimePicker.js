@@ -42,13 +42,11 @@ const DatePicker = ({title, time}) => {
   const {entryValues, setEntryValues} = useContext(SleepLogsContext)
   useEffect(() => {
     if (time) {
-      console.log(time)
-      setSelectedDate(time)
     } else {
       console.log('ELSE')
       setSelectedDate(new Date())
     }
-  }, [])
+  }, [time])
 
   const handleDateChange = date => {
     console.log(date);
@@ -64,12 +62,10 @@ const DatePicker = ({title, time}) => {
         ...entryValues,
         wake_time: moment(date).format('HH:mm:ss'),
       })
-
     }
     setSelectedDate(date);
   };
 
-  console.log(entryValues)
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>

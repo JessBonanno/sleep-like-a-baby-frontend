@@ -2,6 +2,7 @@ import React, {createContext, useState, Context} from 'react';
 import {axiosWithAuth} from '../utils/axiosWithAuth'
 import moment from "moment";
 
+
 export const SleepLogsContext = createContext({});
 
 const SleepLogsProvider = ({children}) => {
@@ -19,7 +20,6 @@ const SleepLogsProvider = ({children}) => {
   const getDaysOfTheWeek = async (date) => {
     try {
       const res = await axiosWithAuth().get(`/week/days/?date=${date}`)
-      console.log(res)
       setDaysOfWeek(res.data.map(day => {
         return {
           // setting the date to day of the week for chart
@@ -35,7 +35,6 @@ const SleepLogsProvider = ({children}) => {
   const startNewLog = async () => {
     try {
       const res = await axiosWithAuth().post('/day/current-user', entryValues)
-      console.log(res)
       setActiveDayLog(res.data)
     } catch (err) {
       console.log(err)
@@ -44,7 +43,6 @@ const SleepLogsProvider = ({children}) => {
   const submitEntryForm = async () => {
     try {
       const res = await axiosWithAuth().put(`/day/${activeDayLog.id}`, entryValues)
-      console.log(res)
     } catch (err) {
       console.log(err)
     }

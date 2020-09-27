@@ -8,22 +8,23 @@ import {Button, IconButton} from "@material-ui/core";
 import EntryCard from "./EntryCard";
 import {SleepLogsContext} from "../../contexts/SleepLogsContext";
 import {act} from "@testing-library/react";
+import {useHistory} from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   entryContainer: {
     marginTop: theme.spacing(8),
   },
-  entryPageTitleWrapper:{},
-  entryPageTitleContainer:{},
-  bedtimeWrapper:{},
-  wakeTimeWrapper:{},
+  entryPageTitleWrapper: {},
+  entryPageTitleContainer: {},
+  bedtimeWrapper: {},
+  wakeTimeWrapper: {},
   titleWrapper: {
     margin: theme.spacing(0, 3)
   },
   deleteWrapper: {
     margin: theme.spacing(0, 3)
   },
-  dayMoodWrapper:{},
+  dayMoodWrapper: {},
   deleteIcon: {
     marginBottom: '.2em'
   },
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Entry = () => {
   const classes = useStyles();
+  const history = useHistory();
   const {activeDayLog, startNewLog, entryValues, setEntryValues, submitEntryForm} = useContext(SleepLogsContext)
   const [logInfo, setLogInfo] = useState();
 
@@ -43,12 +45,16 @@ const Entry = () => {
 
   }, [])
   useEffect(() => {
-    if(activeDayLog) {
+    if (activeDayLog) {
       setEntryValues(activeDayLog)
     }
   }, [activeDayLog])
 
+  const submitEntry = async () => {
+    await submitEntryForm(entryValues);
+    history.push('/dashboard')
 
+  }
 
   return (
     <Grid container direction={'column'} className={classes.entryContainer}
@@ -62,7 +68,7 @@ const Entry = () => {
         >
           <Grid item className={classes.titleWrapper}>
             <Typography variant={'h6'}>Entry
-              for {moment(entryValues && entryValues.date).add(1, 'day').format('MM-DD-YY')}</Typography>
+              for {moment(entryValues && entryValues.date).format('MM-DD-YY')}</Typography>
           </Grid>
           <Grid item className={classes.deleteWrapper}>
             <IconButton>
@@ -72,16 +78,19 @@ const Entry = () => {
         </Grid>
       </Grid>
       <Grid item className={classes.bedtimeWrapper}>
-        <EntryCard title={'Bedtime'} score={entryValues.bedtime_score} time={entryValues.bedtime}/>
+        <EntryCard title={'Bedtime'} score={entryValues.bedtime_score}
+                   time={entryValues.bedtime}/>
       </Grid>
       <Grid item className={classes.wakeTimeWrapper}> <EntryCard
-        title={'Wake Time'} score={entryValues.wake_score} time={entryValues.wake_time}/>
+        title={'Wake Time'} score={entryValues.wake_score}
+        time={entryValues.wake_time}/>
       </Grid>
       <Grid item className={classes.dayMoodWrapper}>
-        <EntryCard title={'Day Mood'}score={entryValues.day_score}/>
+        <EntryCard title={'Day Mood'} score={entryValues.day_score}/>
       </Grid>
       <Grid item className={classes.buttonWrapper}>
-        <Button variant={'outlined'} color={'primary'} onClick={() => submitEntryForm(entryValues)}>Submit</Button>
+        <Button variant={'outlined'} color={'primary'}
+                onClick={submitEntry}>Submit</Button>
       </Grid>
     </Grid>
   );
