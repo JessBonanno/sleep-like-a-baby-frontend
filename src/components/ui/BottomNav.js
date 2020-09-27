@@ -6,6 +6,7 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import HotelIcon from '@material-ui/icons/Hotel';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import theme from './Theme'
 import {useHistory} from "react-router";
 
@@ -38,6 +39,8 @@ export default function SimpleBottomNavigation() {
       <BottomNavigationAction className={classes.action} onClick={()=> history.push('/dashboard') } label="Dashboard"  icon={<BarChartIcon />} />
       <BottomNavigationAction className={classes.action} onClick={()=> history.push('/recommendation') } label="My Sleep" icon={<HotelIcon />} />
       <BottomNavigationAction className={classes.action} onClick={()=> history.push('/create-entry') }  label="Add Entry" icon={<AddCircleOutlineIcon />} />
+      <BottomNavigationAction className={classes.action} onClick={()=> history.push('/login') } label="Login"  icon={<EmojiPeopleIcon />} />
+
     </BottomNavigation>
   );
 }
