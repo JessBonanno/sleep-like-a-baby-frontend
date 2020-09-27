@@ -80,6 +80,7 @@ export default createMuiTheme({
     },
     h3: {
       color: 'white',
+      fontFamily: comfortaa,
     },
     h4: {
       color: 'white',
