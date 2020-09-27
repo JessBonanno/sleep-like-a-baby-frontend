@@ -81,9 +81,9 @@ const Signup = () => {
                        id="username-input"
                        label="Username"
                        name="username"
+                       type={'text'}
                        value={values.username}
                        placeholder="Username"
-                       autoComplete={'username'}
                        className={classes.input}
                        onChange={handleChanges}/>
           </Grid>
@@ -92,9 +92,9 @@ const Signup = () => {
                        id="email-input"
                        label="Email"
                        name="email"
+                       type={'text'}
                        value={values.email}
                        placeholder="Email"
-                       autoComplete={'email'}
                        className={classes.input}
                        onChange={handleChanges}/>
 
@@ -107,7 +107,6 @@ const Signup = () => {
                        value={values.password}
                        placeholder="Password"
                        type={'password'}
-                       autoComplete={'current-password'}
                        className={classes.input}
                        onChange={handleChanges}/>
 
