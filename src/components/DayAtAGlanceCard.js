@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   hoursSlept: {},
   qualityEmoji: {
-    marginTop: theme.spacing(1),
+    fontSize: '1.5rem',
   },
   feelings: {
     padding: theme.spacing(0, 8, 0, 2)
@@ -39,10 +39,10 @@ const DayAtAGlanceCard = ({day}) => {
   const formattedWakeTime = moment(wakeTime).format('hh:mm:A')
 
   const moods = {
-    1: <SentimentVeryDissatisfiedIcon className={classes.qualityEmoji}/>,
-    2: <SentimentDissatisfiedIcon className={classes.qualityEmoji}/>,
-    3: <SentimentSatisfiedIcon className={classes.qualityEmoji}/>,
-    4: <SentimentVerySatisfiedIcon className={classes.qualityEmoji}/>,
+    1: '😖',
+    2: '😐',
+    3: '😀',
+    4: '😁',
   }
 
   return (
@@ -63,7 +63,7 @@ const DayAtAGlanceCard = ({day}) => {
               Woke up feeling:
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid item className={classes.qualityEmoji}>
             {moods[day.wake_score]}
           </Grid>
         </Grid><Grid container direction={'row'} justify={'space-between'}
@@ -73,7 +73,7 @@ const DayAtAGlanceCard = ({day}) => {
             Through the day felt:
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid item className={classes.qualityEmoji} >
           {moods[day.day_score]}
         </Grid>
       </Grid><Grid container direction={'row'} justify={'space-between'}
@@ -83,7 +83,7 @@ const DayAtAGlanceCard = ({day}) => {
             Went to sleep feeling:
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid item className={classes.qualityEmoji}>
           {moods[day.bedtime_score]}
         </Grid>
       </Grid> <Grid container direction={'row'} justify={'space-between'}
@@ -93,7 +93,7 @@ const DayAtAGlanceCard = ({day}) => {
             Overall Quality:
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid item className={classes.qualityEmoji}>
           {moods[day.average_quality]}
         </Grid>
       </Grid>

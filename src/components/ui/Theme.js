@@ -91,7 +91,7 @@ export default createMuiTheme({
     },
     h6: {
       color: 'white',
-      fontSize: '1rem',
+      fontSize: '1.2rem',
       fontFamily: comfortaa,
     },
     p: {
@@ -99,7 +99,7 @@ export default createMuiTheme({
     },
     subtitle1: {
       color: 'white',
-      fontSize: '.8rem',
+      fontSize: '1rem',
     },
     subtitle2: {
       color: gray,
