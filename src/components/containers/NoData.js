@@ -6,6 +6,7 @@ import {Button} from "@material-ui/core";
 
 // assests imports
 import sleepImage from '../../assets/images/sleep_image.svg'
+import {Link, useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   noDataContainer: {
@@ -37,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 const NoData = () => {
   const classes = useStyles();
+  const history = useHistory();
   return (
     <Grid container direction={'row'} className={classes.noDataContainer}
           justify={'space-evenly'} alignItems={'center'}>
@@ -65,7 +67,9 @@ const NoData = () => {
                   className={classes.buttonContainer} spacing={3}>
               <Grid item className={classes.buttonItem}>
                 <Button
-                  className={classes.button} variant={'contained'}
+                  className={classes.button}
+                  variant={'contained'}
+                  onClick={() => history.push('/dashboard')}
                   color={'primary'}>Continue
                   tracking</Button> </Grid>
               <Grid item className={classes.buttonItem}>

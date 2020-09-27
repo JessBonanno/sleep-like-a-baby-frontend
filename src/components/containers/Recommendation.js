@@ -7,6 +7,7 @@ import {Button} from "@material-ui/core";
 // assests imports
 import sleepImage from '../../assets/images/sleep_image.svg'
 import {UsersContext} from "../../contexts/UsersContext";
+import {Link, useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   recommendationContainer: {
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Recommendation = () => {
   const classes = useStyles();
+  const history = useHistory()
   const {getUserInfo, userInfo} = useContext(UsersContext)
 
   useEffect(() => {
@@ -72,7 +74,9 @@ const Recommendation = () => {
                   className={classes.buttonContainer} spacing={3}>
               <Grid item className={classes.buttonItem}>
                 <Button
-                  className={classes.button} variant={'contained'}
+                  className={classes.button}
+                  variant={'contained'}
+                  onClick={() => history.push('/dashboard')}
                   color={'primary'}>Continue
                   tracking</Button> </Grid>
               <Grid item className={classes.buttonItem}>
