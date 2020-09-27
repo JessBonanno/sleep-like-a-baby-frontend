@@ -130,7 +130,8 @@ const MarketingPage = () => {
         <Grid container direction={'row'} className={classes.previewContainer}
               justify={'space-evenly'}>
           <Grid item className={classes.previewWrapper}>
-            <Grid container direction={'column'} alignItems={'center'} spacing={5}
+            <Grid container direction={'column'} alignItems={'center'}
+                  spacing={5}
                   className={classes.previewItemContainer}>
               <Grid item className={classes.previewItem}>
                 <div className={classes.previewImage} style={{
@@ -144,7 +145,8 @@ const MarketingPage = () => {
             </Grid>
           </Grid>
           <Grid item className={classes.previewWrapper}>
-            <Grid container direction={'column'} alignItems={'center'} spacing={5}
+            <Grid container direction={'column'} alignItems={'center'}
+                  spacing={5}
                   className={classes.previewItemContainer}>
               <Grid item className={classes.previewItem}>
                 <div className={classes.previewImage} style={{
@@ -167,7 +169,7 @@ const MarketingPage = () => {
             </Grid>
             <Grid item align={'center'}>
               <Typography variant={'h5'}>Find the sleep that's</Typography>
-                            <Typography variant={'h5'}>right for you</Typography>
+              <Typography variant={'h5'}>right for you</Typography>
 
             </Grid>
           </Grid>
