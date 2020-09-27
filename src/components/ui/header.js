@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     textDecoration: "none",
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1.2rem',
+    },
   },
   link: {
     ...theme.typography.navLink,
@@ -40,15 +43,13 @@ export default function ButtonAppBar() {
   const classes = useStyles();
   const {logout, userInfo} = useContext(UsersContext)
   const theme = useTheme();
-  const XSDown = useMediaQuery(theme.breakpoints.down('xs'))
-  const SMDown = useMediaQuery(theme.breakpoints.down('sm'))
-  const MDDown = useMediaQuery(theme.breakpoints.down('md'))
-  const LGDown = useMediaQuery(theme.breakpoints.down('lg'))
+  const mobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const tablet = useMediaQuery(theme.breakpoints.down('md'))
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          {SMDown && (
+          {mobile && (
             <IconButton edge="start" className={classes.menuButton}
                         color="inherit" aria-label="menu">
               <MenuIcon/>
@@ -58,16 +59,13 @@ export default function ButtonAppBar() {
                       className={classes.title}>
             Sleep Like A Baby
           </Typography>
-          <Typography component={Link} to={'/dashboard'}
+          {!mobile && <><Typography component={Link} to={'/dashboard'}
                       className={classes.link}>
             Dashboard
           </Typography>
-          <Typography component={Link}
-                      to={userInfo && (userInfo.recommended_hours > 0)
-                        ?
-                        '/recommendation'
-                        : '/no-data'
-                      }
+          <Typography component={Link} to={userInfo && (userInfo.recommended_hours > 0)
+                        ?'/recommendation'
+                        :'/no-data'}
                       className={classes.link}>
             Recommendation
           </Typography>
@@ -78,7 +76,8 @@ export default function ButtonAppBar() {
             </Typography> : <Typography component={Link} to={'/login'}
                                         className={classes.link}>
               Login
-            </Typography>}
+            </Typography>}</>}
+
 
 
         </Toolbar>
