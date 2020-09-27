@@ -4,11 +4,15 @@ import './index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import {RootProvider} from "./contexts/RootContext";
+import {ThemeProvider} from "@material-ui/core/styles";
+import theme from "./components/ui/Theme";
 
 ReactDOM.render(
   <RootProvider>
+    <ThemeProvider theme={theme}>
       <App/>
-      </RootProvider>,
+    </ThemeProvider>
+  </RootProvider>,
 
   document.getElementById('root')
 );

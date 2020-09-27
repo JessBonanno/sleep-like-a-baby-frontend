@@ -13,6 +13,11 @@ import {useHistory} from "react-router";
 const useStyles = makeStyles((theme) => ({
   entryContainer: {
     marginTop: theme.spacing(8),
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(10),
+      marginLeft: theme.spacing(-1),
+    },
   },
   entryPageTitleWrapper: {},
   entryPageTitleContainer: {},
@@ -20,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
   wakeTimeWrapper: {},
   titleWrapper: {
     margin: theme.spacing(0, 3)
+
   },
   deleteWrapper: {
     margin: theme.spacing(0, 3)

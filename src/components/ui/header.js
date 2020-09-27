@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     ...theme.typography.navLink,
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
   }
 }));
 
@@ -43,23 +43,24 @@ export default function ButtonAppBar() {
   const classes = useStyles();
   const {logout, userInfo} = useContext(UsersContext)
   const theme = useTheme();
+  const mobileSM = useMediaQuery(theme.breakpoints.down('xs'))
   const mobile = useMediaQuery(theme.breakpoints.down('sm'))
   const tablet = useMediaQuery(theme.breakpoints.down('md'))
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          {mobile && (
-            <IconButton edge="start" className={classes.menuButton}
-                        color="inherit" aria-label="menu">
-              <MenuIcon/>
-            </IconButton>
-          )}
+          {/*{mobile && (*/}
+          {/*  <IconButton edge="start" className={classes.menuButton}*/}
+          {/*              color="inherit" aria-label="menu">*/}
+          {/*    <MenuIcon/>*/}
+          {/*  </IconButton>*/}
+          {/*)}*/}
           <Typography component={Link} to={'/'} variant="h5"
                       className={classes.title}>
             Sleep Like A Baby
           </Typography>
-          {!mobile && <><Typography component={Link} to={'/dashboard'}
+          {!mobileSM && <><Typography component={Link} to={'/dashboard'}
                       className={classes.link}>
             Dashboard
           </Typography>

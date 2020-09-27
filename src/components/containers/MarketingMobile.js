@@ -8,12 +8,14 @@ import recommendImage from "../../assets/images/recommend.png";
 
 
 const useStyles = makeStyles((theme) => ({
-  imageContainer: {
-  },
+  imageContainer: {},
   previewWrapper: {
-    marginTop: theme.spacing(8)
+        marginBottom: theme.spacing(5),
+
   },
   previewContainer: {
+    marginTop: theme.spacing(6),
+    marginBottom: theme.spacing(10),
   },
   previewItem: {
     border: `1px solid ${theme.palette.common.astral}`,
@@ -32,58 +34,61 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const MarketingMobile = () =>{
-const classes = useStyles();
+const MarketingMobile = () => {
+  const classes = useStyles();
 
-    return (
-            <Grid container direction={'column'}
-                  alignItems={'center'}
-                  className={classes.previewContainer}
-                  >
-              <Grid item className={classes.previewWrapper}>
-                <Grid container direction={'column'} alignItems={'center'} justify={'center'}
-                      className={classes.previewItemContainer}>
-                  <Grid item className={classes.previewItem}>
-                    <div className={classes.previewImage} style={{
-                      backgroundImage: `url(${trackImage})`
-                    }}>
-                    </div>
-                  </Grid>
-                  <Grid item>
-                    <Typography className={classes.previewText} variant={'h5'}>Track your sleep</Typography>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Grid item className={classes.previewWrapper}>
-                <Grid container direction={'column'} alignItems={'center'}
-                      className={classes.previewItemContainer}>
-                  <Grid item className={classes.previewItem}>
-                    <div className={classes.previewImage} style={{
-                      backgroundImage: `url(${rateImage})`
-                    }}>
-                    </div>
-                  </Grid>
-                  <Grid item>
-                    <Typography className={classes.previewText} variant={'h5'}>Rate your moods</Typography>
-                  </Grid>
-                </Grid>
-              </Grid><Grid item className={classes.previewWrapper}>
-              <Grid container direction={'column'} alignItems={'center'}
-                    className={classes.previewItemContainer}>
-                <Grid item className={classes.previewItem}>
-                  <div className={classes.previewImage} style={{
-                    backgroundImage: `url(${recommendImage})`
-                  }}>
-                  </div>
-                </Grid>
-                <Grid item align={'center'}>
-                  <Typography className={classes.previewText} variant={'h5'}>Find the sleep that's</Typography>
-                  <Typography  variant={'h5'}>right for you</Typography>
+  return (
+    <Grid container direction={'column'}
+          // alignItems={'center'}
+          className={classes.previewContainer}
+    >
+      <Grid item className={classes.previewWrapper}>
+        <Grid container direction={'column'} alignItems={'center'}
+              className={classes.previewItemContainer}>
+          <Grid item className={classes.previewItem}>
+            <div className={classes.previewImage} style={{
+              backgroundImage: `url(${trackImage})`
+            }}>
+            </div>
+          </Grid>
+          <Grid item>
+            <Typography className={classes.previewText} variant={'h5'}>Track
+              your sleep</Typography>
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item className={classes.previewWrapper}>
+        <Grid container direction={'column'} alignItems={'center'}
+              className={classes.previewItemContainer}>
+          <Grid item className={classes.previewItem}>
+            <div className={classes.previewImage} style={{
+              backgroundImage: `url(${rateImage})`
+            }}>
+            </div>
+          </Grid>
+          <Grid item>
+            <Typography className={classes.previewText} variant={'h5'}>Rate your
+              moods</Typography>
+          </Grid>
+        </Grid>
+      </Grid><Grid item className={classes.previewWrapper}>
+      <Grid container direction={'column'} alignItems={'center'}
+            className={classes.previewItemContainer}>
+        <Grid item className={classes.previewItem}>
+          <div className={classes.previewImage} style={{
+            backgroundImage: `url(${recommendImage})`
+          }}>
+          </div>
+        </Grid>
+        <Grid item align={'center'}>
+          <Typography className={classes.previewText} variant={'h5'}>Find the
+            sleep that's</Typography>
+          <Typography variant={'h5'}>right for you</Typography>
 
-                </Grid>
-              </Grid>
-            </Grid>
-            </Grid>
-    );
+        </Grid>
+      </Grid>
+    </Grid>
+    </Grid>
+  );
 }
 export default MarketingMobile;
