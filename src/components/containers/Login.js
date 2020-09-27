@@ -84,7 +84,6 @@ const Login = () => {
                          name="username"
                          value={values.username}
                          placeholder="Username"
-                         autoComplete={'username'}
                          className={classes.input}
                          onChange={handleChanges}/>
             </Grid>
@@ -96,7 +95,6 @@ const Login = () => {
                          name={'password'}
                          value={values.password}
                          type={'password'}
-                         autoComplete={'current-password'}
                          className={classes.input}
                          onChange={handleChanges}/>
             </Grid>
