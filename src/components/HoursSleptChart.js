@@ -15,6 +15,8 @@ import {
   ComposedChart, Bar,
 } from 'recharts';
 import {SleepLogsContext} from "../contexts/SleepLogsContext";
+import {useTheme} from "@material-ui/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const chartData = [
   {
@@ -29,7 +31,6 @@ const chartData = [
 ];
 
 
-
 const useStyles = makeStyles((theme) => ({
   chart: {
     color: 'white',
@@ -40,26 +41,32 @@ const useStyles = makeStyles((theme) => ({
 
 const HoursSleptChart = () => {
   const classes = useStyles();
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const tablet = useMediaQuery(theme.breakpoints.down('md'))
+
   const {daysOfWeek} = useContext(SleepLogsContext)
 
   return (
     <ComposedChart
       className={classes.chart}
-        width={500}
-        height={400}
-        data={daysOfWeek && daysOfWeek}
-        margin={{
-          top: 20, right: 20, bottom: 20, left: 20,
-        }}
-      >
-        <CartesianGrid stroke="#f5f5f5" />
-        <XAxis dataKey={daysOfWeek && "day"} />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey={daysOfWeek && "total_hours_slept"} barSize={20} fill="#39869D" />
-        <Line type="monotone" dataKey={daysOfWeek && "average_quality"} stroke="#ff7300" />
-      </ComposedChart>
+      width={mobile ? 350 : 500}
+      height={mobile? 350 : 400}
+      data={daysOfWeek && daysOfWeek}
+      margin={{
+        top: 20, right: 20, bottom: 20, left: 20,
+      }}
+    >
+      <CartesianGrid stroke="#f5f5f5"/>
+      <XAxis dataKey={daysOfWeek && "day"}/>
+      <YAxis/>
+      <Tooltip/>
+      <Legend/>
+      <Bar dataKey={daysOfWeek && "total_hours_slept"} barSize={20}
+           fill="#39869D"/>
+      <Line type="monotone" dataKey={daysOfWeek && "average_quality"}
+            stroke="#ff7300"/>
+    </ComposedChart>
   );
 }
 export default HoursSleptChart;

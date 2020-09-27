@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core/styles";
-import {Button} from "@material-ui/core";
+import {Button, useMediaQuery} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import AddIcon from '@material-ui/icons/Add';
 
@@ -14,17 +14,31 @@ import DayAtAGlance from "./DayAtAGlance";
 import DatePicker from "../DatePicker";
 import {SleepLogsContext} from "../../contexts/SleepLogsContext";
 import moment from "moment";
+import {useTheme} from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   homepageContainer: {
     marginTop: theme.spacing(1),
     padding: theme.spacing(2, 5),
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(2, 0),
+      marginBottom: theme.spacing(10),
+    },
   },
   homeMenuWrapper: {
     marginTop: theme.spacing(1),
   },
+  mainHeader: {
+    [theme.breakpoints.down('md')]: {
+      fontSize: '1.2rem',
+      padding: theme.spacing(2, 0, 0)
+    },
+  },
   chartWrapper: {
     width: 400,
+    [theme.breakpoints.down('sm')]: {
+      width: 350,
+    }
   },
   daysAtAGlanceWrapper: {},
   chartHeader: {
@@ -32,6 +46,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.mineShaft7p,
     padding: theme.spacing(1.5),
     width: 500,
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      padding: theme.spacing(1),
+      marginBottom: theme.spacing(1),
+      fontSize: '.8rem'
+    }
   },
   headerText: {
     textAlign: 'center',
@@ -44,12 +64,20 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     width: 150,
+    padding: theme.spacing(1),
+    margin: theme.spacing(2, 0, 4),
+    [theme.breakpoints.down('sm')]: {
+      width: 350,
+    }
   },
 }));
 
 
 const Dashboard = () => {
   const classes = useStyles();
+  const theme = useTheme()
+  const tablet = useMediaQuery(theme.breakpoints.down('md'));
+  const mobile = useMediaQuery(theme.breakpoints.down('sm'));
   const {getDaysOfTheWeek, daysOfWeek, startNewLog} = useContext(SleepLogsContext)
 
   useEffect(() => {
@@ -59,10 +87,10 @@ const Dashboard = () => {
   return (
     <Grid container direction={'column'}>
       <Grid item className={classes.homeMenuWrapper}>
-        <Grid container className={classes.homeMenuContainer}
-              justify={'center'} spacing={8} alignItems={'center'}>
+        <Grid container className={classes.homeMenuContainer} direction={tablet? 'column':'row'}
+              justify={'center'} spacing={!mobile && 8} alignItems={'center'}>
           <Grid item className={classes.dateText}>
-            <Typography variant={'h5'}>Select a week to view</Typography>
+            <Typography variant={'h5'} className={classes.mainHeader}>Select a week to view</Typography>
           </Grid>
           <Grid item className={classes.datePicker}>
             <DatePicker/>
