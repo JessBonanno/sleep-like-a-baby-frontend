@@ -109,7 +109,7 @@ const MarketingPage = () => {
                   <Grid item className={classes.buttonItem}>
                     <Button
                       className={classes.button}
-                      onClick={() => history.push('/signup')}
+                      onClick={() => history.push('/login')}
                       variant={'outlined'}
                       color={'primary'}>Login</Button> </Grid>
                 </Grid>

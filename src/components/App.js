@@ -23,7 +23,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Header/>
-          <Route path="/">
+          <Route exact path="/">
             <MarketingPage/>
           </Route>
           <Route path="/login">
