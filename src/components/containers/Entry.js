@@ -47,8 +47,7 @@ const Entry = () => {
   const [logInfo, setLogInfo] = useState();
 
   useEffect(() => {
-    startNewLog()
-
+    // startNewLog()
   }, [])
   useEffect(() => {
     if (activeDayLog) {
@@ -57,6 +56,7 @@ const Entry = () => {
   }, [activeDayLog])
 
   const submitEntry = async () => {
+    await startNewLog();
     await submitEntryForm(entryValues);
     history.push('/dashboard')
 
@@ -77,6 +77,7 @@ const Entry = () => {
               for {moment(entryValues && entryValues.date).format('MM-DD-YY')}</Typography>
           </Grid>
           <Grid item className={classes.deleteWrapper}>
+            {/* TODO add functionality to delete button */}
             <IconButton>
               <DeleteForeverTwoToneIcon className={classes.deleteIcon}/>
             </IconButton>
@@ -84,11 +85,11 @@ const Entry = () => {
         </Grid>
       </Grid>
       <Grid item className={classes.bedtimeWrapper}>
-        <EntryCard title={'Bedtime'} score={entryValues.bedtime_score}
+        <EntryCard title={'Bedtime Last Night'} score={entryValues.bedtime_score}
                    time={entryValues.bedtime}/>
       </Grid>
       <Grid item className={classes.wakeTimeWrapper}> <EntryCard
-        title={'Wake Time'} score={entryValues.wake_score}
+        title={'Wake Time This Morning'} score={entryValues.wake_score}
         time={entryValues.wake_time}/>
       </Grid>
       <Grid item className={classes.dayMoodWrapper}>
