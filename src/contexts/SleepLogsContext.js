@@ -24,11 +24,16 @@ const SleepLogsProvider = ({children}) => {
         return {
           // setting the date to day of the week for chart
           ...day,
-          day: moment(day.date).add(1, 'day').format('dddd'),
-          date: moment(day.date).add(1, 'day').format('MM-DD-YY')
+          day: moment(day.date).format('dddd'),
+          date: moment(day.date).format('MM-DD-YY')
         }
       }))
     } catch (err) {
+      // setting the date to the date passed in if there is no data in the
+      // db for that week (error fetching in backend)
+      setDaysOfWeek([{
+        date: moment(date).format('MM-DD-YY')
+      }])
       console.log(err)
     }
   }

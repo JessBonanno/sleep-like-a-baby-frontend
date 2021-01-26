@@ -9,7 +9,6 @@ import AddIcon from '@material-ui/icons/Add';
 
 // local components
 import HoursSleptChart from "../HoursSleptChart";
-import DayAtAGlanceCard from "../DayAtAGlanceCard";
 import DayAtAGlance from "./DayAtAGlance";
 import DatePicker from "../DatePicker";
 import {SleepLogsContext} from "../../contexts/SleepLogsContext";
@@ -56,6 +55,13 @@ const useStyles = makeStyles((theme) => ({
   headerText: {
     textAlign: 'center',
   },
+  headerDate: {
+    textAlign: 'center',
+  },
+  headerMessage: {
+    textAlign: 'center',
+    fontSize: '1rem'
+  },
   datePicker: {
     marginBottom: theme.spacing(1),
   },
@@ -78,19 +84,25 @@ const Dashboard = () => {
   const theme = useTheme()
   const tablet = useMediaQuery(theme.breakpoints.down('md'));
   const mobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const {getDaysOfTheWeek, daysOfWeek, startNewLog} = useContext(SleepLogsContext)
+  const {
+    getDaysOfTheWeek,
+    daysOfWeek,
+    startNewLog
+  } = useContext(SleepLogsContext)
 
   useEffect(() => {
     getDaysOfTheWeek(moment().format('MM-DD-YYYY'))
   }, [])
-
+  console.log({daysOfWeek})
   return (
     <Grid container direction={'column'}>
       <Grid item className={classes.homeMenuWrapper}>
-        <Grid container className={classes.homeMenuContainer} direction={tablet? 'column':'row'}
+        <Grid container className={classes.homeMenuContainer}
+              direction={tablet ? 'column' : 'row'}
               justify={'center'} spacing={!mobile && 8} alignItems={'center'}>
           <Grid item className={classes.dateText}>
-            <Typography variant={'h5'} className={classes.mainHeader}>Select a week to view</Typography>
+            <Typography variant={'h5'} className={classes.mainHeader}>Select a
+              week to view</Typography>
           </Grid>
           <Grid item className={classes.datePicker}>
             <DatePicker/>
@@ -106,7 +118,13 @@ const Dashboard = () => {
               <Grid item className={classes.chartHeader}>
                 <Typography variant={'h6'} className={classes.headerText}>Insights
                   for the Week
-                  of: {daysOfWeek[0] && daysOfWeek[0].date}</Typography>
+                  of: </Typography>
+                <Typography variant={'h6'}
+                            className={classes.headerDate}>{daysOfWeek[0] && daysOfWeek[0].date}</Typography>
+                {daysOfWeek[0] && !daysOfWeek[0].id &&
+                <Typography variant={'h6'} className={classes.headerMessage}>
+                  No entries to display for this week
+                </Typography>}
               </Grid>
               <Grid item>
                 <HoursSleptChart/>
